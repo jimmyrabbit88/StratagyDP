@@ -10,19 +10,35 @@ public class Trip {
     }
 
     public void calculateFee(){
-        if(timeInMinutes <= 30){
+        if(isShortTrip()){
             this.totalFee = timeInMinutes * 3;
         }
         else{
-            if(membership.getMembershipLevel() == 0){
+            if(isNotMember()){
                 this.totalFee = timeInMinutes * 3;
             }
-            else if(membership.getMembershipLevel() == 1){
+            else if(isLowMember()){
                 this.totalFee = Math.round((timeInMinutes * 3) * .9f);
             }
-            else{
-                this.totalFee = Math.round((timeInMinutes * 3) * .75f)
+            else if(isHighMember()){
+                this.totalFee = Math.round((timeInMinutes * 3) * .75f);
             }
         }
+    }
+
+    private boolean isShortTrip(){
+        return timeInMinutes <= 30;
+    }
+
+    private boolean isNotMember(){
+        return membership.getMembershipLevel() == 0;
+    }
+
+    private boolean isLowMember(){
+        return membership.getMembershipLevel() == 1;
+    }
+
+    private boolean isHighMember(){
+        return membership.getMembershipLevel() == 2;
     }
 }

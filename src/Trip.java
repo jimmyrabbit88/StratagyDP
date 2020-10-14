@@ -15,13 +15,13 @@ public class Trip {
         }
         else{
             if(isNotMember()){
-                this.totalFee = timeInMinutes * 3;
+                this.totalFee = doCalculationNonMember();
             }
             else if(isLowMember()){
-                this.totalFee = Math.round((timeInMinutes * 3) * .9f);
+                this.totalFee = doCalculationLowMember();
             }
             else if(isHighMember()){
-                this.totalFee = Math.round((timeInMinutes * 3) * .75f);
+                this.totalFee = doCalculationHighMember();
             }
         }
     }
@@ -40,5 +40,15 @@ public class Trip {
 
     private boolean isHighMember(){
         return membership.getMembershipLevel() == 2;
+    }
+
+    private int doCalculationNonMember(){
+        return timeInMinutes * 3;
+    }
+    private int doCalculationLowMember(){
+        return Math.round((timeInMinutes * 3) * .9f);
+    }
+    private int doCalculationHighMember(){
+        return Math.round((timeInMinutes * 3) * .75f);
     }
 }

@@ -1,0 +1,37 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+Class Trip {
+    - Fee fee
+    - Member membership
+    - int timeInMinutes
+    - int totalFee
+}
+
+Interface FeeBehaviour{
+    +{abstract} void calcFee()
+}
+
+Class Member{
+    - String name
+    - int membershipLevel
+}
+
+Class NonMember{
+    void calcFee()
+}
+
+Class LowMember{
+    void calcFee()
+}
+
+Class HighMember{
+    void calcFee()
+}
+
+Trip --> FeeBehaviour
+Trip --> Member
+FeeBehaviour <|.. NonMember
+FeeBehaviour <|.. LowMember
+FeeBehaviour <|.. HighMember
+@enduml
